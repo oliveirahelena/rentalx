@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d src/database/data-source.ts"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "migration:run": "ts-node-dev ./node_modules/typeorm/cli migration:run -d src/database/data-source.ts",
+    "migration:revert": "ts-node-dev ./node_modules/typeorm/cli migration:revert -d src/database/data-source.ts"
   },
   "dependencies": {
     "csv-parse": "^5.3.0",

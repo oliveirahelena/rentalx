@@ -4,18 +4,20 @@ import { DataSource } from "typeorm";
 const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
-  port: 5432,
+  port: process.env.NODE_ENV === "test" ? 5555 : 5432,
   username: "docker",
   password: "ignite",
-  database: "rentalx",
+  database: process.env.NODE_ENV === "test" ? "rentalx_test" : "rentalx",
   synchronize: false,
   logging: false,
-  entities: [],
-  migrations: ["./src/database/migrations"],
+  entities: ["src/modules/**/entities/*.ts"],
+  migrations: ["src/database/migrations/*.ts"],
   subscribers: [],
 });
 
-export function createConnection(host = "db"): Promise<DataSource> {
+export function createConnection(
+  host = process.env.NODE_ENV === "test" ? "localhost" : "db"
+): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
 }
 
