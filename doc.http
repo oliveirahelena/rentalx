@@ -43,3 +43,19 @@ GET http://localhost:3333/specifications HTTP/1.1
 Content-Type: application/json; charset=utf-8
 
 ### 
+
+### **** Car module ****
+
+### Create a user
+
+POST http://localhost:3333/users HTTP/1.1
+Content-Type: application/json; charset=utf-8
+
+{
+  "name": "Helena",
+  "email": "exemple@gmail.com",
+  "password": "123456",
+  "driver_license": "12345678"
+}
+
+###
