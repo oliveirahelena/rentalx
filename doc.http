@@ -31,7 +31,7 @@ Content-Type: application/json; charset=utf-8
 
 POST http://localhost:3333/specifications HTTP/1.1
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwNzA4OTcsImV4cCI6MTY1ODA3MTc5Nywic3ViIjoiMzM0YzQ4OWItZmNjNy00NGViLWIwMjQtZGMxNGMyM2E3OGQxIn0.pX48z6VtzboQ-ZOdN-wHqfWKP8kTdCj7WiSJLRt1E6k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwNzU2NzYsImV4cCI6MTY1ODA3NjU3Niwic3ViIjoiMzM0YzQ4OWItZmNjNy00NGViLWIwMjQtZGMxNGMyM2E3OGQxIn0.D65Uju7O9P359OxooZ5aAF4uDItW5BBaRAtxPm3hoUg
 
 {
   "name": "Câmbio automático",
@@ -66,5 +66,20 @@ Content-Type: application/json; charset=utf-8
   "email": "exemple@gmail.com",
   "password": "123456"
 }
+
+###
+
+### Upload avatar
+
+PATCH http://localhost:3333/users/avatar HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwNzU2NzYsImV4cCI6MTY1ODA3NjU3Niwic3ViIjoiMzM0YzQ4OWItZmNjNy00NGViLWIwMjQtZGMxNGMyM2E3OGQxIn0.D65Uju7O9P359OxooZ5aAF4uDItW5BBaRAtxPm3hoUg
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="avatar"; filename="logo.png"
+Content-Type: image/png
+
+< ./arquivo.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
