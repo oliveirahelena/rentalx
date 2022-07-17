@@ -31,7 +31,7 @@ Content-Type: application/json; charset=utf-8
 
 POST http://localhost:3333/specifications HTTP/1.1
 Content-Type: application/json; charset=utf-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwNjU0MzIsImV4cCI6MTY1ODA2NjMzMiwic3ViIjoiMzM0YzQ4OWItZmNjNy00NGViLWIwMjQtZGMxNGMyM2E3OGQxIn0.GObMPbq87sWFnFBSWFOCslLVzhTV-u6bG8-ivXyzk6A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTgwNzA4OTcsImV4cCI6MTY1ODA3MTc5Nywic3ViIjoiMzM0YzQ4OWItZmNjNy00NGViLWIwMjQtZGMxNGMyM2E3OGQxIn0.pX48z6VtzboQ-ZOdN-wHqfWKP8kTdCj7WiSJLRt1E6k
 
 {
   "name": "Câmbio automático",
