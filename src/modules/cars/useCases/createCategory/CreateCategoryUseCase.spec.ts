@@ -1,66 +1,53 @@
-import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
+import { CategoriesRepositoryInMemory } from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
 
-import { CreateCarUseCase } from "./CreateCarUseCase";
+import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 
-let createCarUseCase: CreateCarUseCase;
-let carsRepositoryInMemory: CarsRepositoryInMemory;
+let createCategoryUseCase: CreateCategoryUseCase;
+let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
 
-describe("Create Car", () => {
-  beforeEach(() => {
-    carsRepositoryInMemory = new CarsRepositoryInMemory();
-    createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
-  });
-
-  it("should be able to create a new car", async () => {
-    const car = await createCarUseCase.execute({
-      name: "Name Car",
-      description: "Description Car",
-      daily_rate: 100,
-      license_plate: "ABC-1234",
-      fine_amount: 60,
-      brand: "Brand",
-      category_id: "category",
+describe("Create Category", () => {
+    beforeEach(() => {
+        categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
+        createCategoryUseCase = new CreateCategoryUseCase(
+            categoriesRepositoryInMemory
+        );
     });
 
-    expect(car).toHaveProperty("id");
-  });
+    it("should be able to create a new category", async () => {
+        const category = {
+            name: "Category Test",
+            description: "Category description Test",
+        };
 
-  it("should not be able to create a car with exists license plate", async () => {
-    await createCarUseCase.execute({
-      name: "Car1",
-      description: "Description Car",
-      daily_rate: 100,
-      license_plate: "ABC-1234",
-      fine_amount: 60,
-      brand: "Brand",
-      category_id: "category",
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description,
+        });
+
+        const categoryCreated = await categoriesRepositoryInMemory.findByName(
+            category.name
+        );
+
+        expect(categoryCreated).toHaveProperty("id");
     });
 
-    await expect(
-      createCarUseCase.execute({
-        name: "Car2",
-        description: "Description Car",
-        daily_rate: 100,
-        license_plate: "ABC-1234",
-        fine_amount: 60,
-        brand: "Brand",
-        category_id: "category",
-      })
-    ).rejects.toEqual(new AppError("Car already exists!"));
-  });
+    it("should not be able to create a new category with name exists", async () => {
+        const category = {
+            name: "Category Test",
+            description: "Category description Test",
+        };
 
-  it("should not be able to create a car with available true by default", async () => {
-    const car = await createCarUseCase.execute({
-      name: "Car Available",
-      description: "Description Car",
-      daily_rate: 100,
-      license_plate: "ABCD-1234",
-      fine_amount: 60,
-      brand: "Brand",
-      category_id: "category",
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description,
+        });
+
+        await expect(
+            createCategoryUseCase.execute({
+                name: category.name,
+                description: category.description,
+            })
+        ).rejects.toEqual(new AppError("Category already exists!"));
     });
-
-    expect(car.available).toBe(true);
-  });
 });
